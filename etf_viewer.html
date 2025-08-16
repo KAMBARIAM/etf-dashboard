@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETF Data Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .positive {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        .negative {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        .error {
+            color: #e74c3c;
+            padding: 10px;
+            background-color: #fadbd8;
+            border-radius: 4px;
+            margin: 10px 0;
+            display: none;
+        }
+        .last-updated {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📈 ETF Market Data</h1>
+        
+        <div id="loading" class="loading">Loading ETF data...</div>
+        <div id="error" class="error"></div>
+        
+        <div id="data-container" style="display: none;">
+            <table id="etf-table">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>ETF Name</th>
+                        <th>Current Price (₹)</th>
+                        <th>52W Low (₹)</th>
+                        <th>52W High (₹)</th>
+                        <th>% From Low</th>
+                        <th>% From High</th>
+                    </tr>
+                </thead>
+                <tbody id="etf-table-body">
+                    <!-- Data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+            <div class="last-updated" id="last-updated"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const dataContainer = document.getElementById('data-container');
+            const tableBody = document.getElementById('etf-table-body');
+            const lastUpdatedEl = document.getElementById('last-updated');
+
+            // Function to format numbers with commas and 2 decimal places
+            function formatNumber(num) {
+                return parseFloat(num).toLocaleString('en-IN', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            }
+
+            // Function to format percentage values
+            function formatPercentage(num) {
+                return parseFloat(num).toFixed(2) + '%';
+            }
+
+            // Function to create a table row for an ETF
+            function createEtfRow(etf) {
+                const row = document.createElement('tr');
+                
+                // Determine CSS class based on percentage change
+                const lowChangeClass = etf.change_from_low_pct >= 0 ? 'positive' : 'negative';
+                const highChangeClass = etf.change_from_high_pct >= 0 ? 'positive' : 'negative';
+                
+                row.innerHTML = `
+                    <td><strong>${etf.symbol || 'N/A'}</strong></td>
+                    <td>${etf.name || 'N/A'}</td>
+                    <td>₹${formatNumber(etf.current_price)}</td>
+                    <td>₹${formatNumber(etf.low_52w)}</td>
+                    <td>₹${formatNumber(etf.high_52w)}</td>
+                    <td class="${lowChangeClass}">${formatPercentage(etf.change_from_low_pct)}</td>
+                    <td class="${highChangeClass}">${formatPercentage(etf.change_from_high_pct)}</td>
+                `;
+                
+                return row;
+            }
+
+            // Function to load and display ETF data
+            async function loadEtfData() {
+                try {
+                    // Show loading state
+                    loadingEl.style.display = 'block';
+                    errorEl.style.display = 'none';
+                    dataContainer.style.display = 'none';
+                    
+                    // Fetch the data
+                    const response = await fetch('./data.json');
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (!Array.isArray(data) || data.length === 0) {
+                        throw new Error('No ETF data available');
+                    }
+                    
+                    // Clear previous data
+                    tableBody.innerHTML = '';
+                    
+                    // Add each ETF to the table
+                    data.forEach(etf => {
+                        const row = createEtfRow(etf);
+                        tableBody.appendChild(row);
+                    });
+                    
+                    // Update last updated time
+                    const now = new Date();
+                    lastUpdatedEl.textContent = `Last updated: ${now.toLocaleString()}`;
+                    
+                    // Show the data container
+                    dataContainer.style.display = 'block';
+                    
+                } catch (error) {
+                    console.error('Error loading ETF data:', error);
+                    errorEl.textContent = `Error: ${error.message}. Please try again later.`;
+                    errorEl.style.display = 'block';
+                } finally {
+                    loadingEl.style.display = 'none';
+                }
+            }
+
+            // Load data when the page loads
+            loadEtfData();
+            
+            // Optional: Add a refresh button functionality
+            // document.getElementById('refresh-btn').addEventListener('click', loadEtfData);
+        });
+    </script>
+</body>
+</html>
