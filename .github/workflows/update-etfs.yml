@@ -5,7 +5,6 @@ on:
     - cron: "30 11 * * 1-5"  # At 11:30 AM UTC (5:00 PM IST) on weekdays (Monday-Friday)
   workflow_dispatch:
 
-# This permission is needed to push changes back to the repository
 permissions:
   contents: write
 
@@ -16,7 +15,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: false  # Important to use the token for authentication
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -30,15 +30,19 @@ jobs:
         run: python etf52.py
 
       - name: Commit and Push Changes
-        # Use the default GITHUB_TOKEN
+        env:
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global --add safe.directory /github/workspace
+          
+          # Configure Git to use the token
+          git config --global url."https://x-access-token:$GH_TOKEN@github.com/".insteadOf "https://github.com/"
           
           # Check if there are any changes to commit
           git diff --quiet && git diff --staged --quiet || (
             git add data.json
             git commit -m "Update ETF data"
-            git push
+            git push origin HEAD:main
           )
