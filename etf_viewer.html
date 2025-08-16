@@ -5,110 +5,251 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ETF Data Viewer</title>
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #4CAF50;
+            --positive: #2ecc71;
+            --negative: #e74c3c;
+            --light-gray: #f9f9f9;
+            --border-color: #ddd;
+            --text-muted: #7f8c8d;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: #333;
+            background-color: #f5f7fa;
         }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 2.2em;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 20px;
+            margin: 0;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-header i {
+            margin-right: 10px;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
         }
+        
         th, td {
-            padding: 12px 15px;
+            padding: 14px 16px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--border-color);
         }
+        
         th {
-            background-color: #4CAF50;
-            color: white;
-            font-weight: bold;
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
         }
+        
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: var(--light-gray);
         }
+        
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f0f4f8;
         }
+        
         .positive {
-            color: #2ecc71;
-            font-weight: bold;
+            color: var(--positive);
+            font-weight: 600;
         }
+        
         .negative {
-            color: #e74c3c;
-            font-weight: bold;
+            color: var(--negative);
+            font-weight: 600;
         }
-        .loading {
+        
+        .loading, .error {
             text-align: center;
-            padding: 20px;
-            font-style: italic;
-            color: #7f8c8d;
+            padding: 30px;
+            font-size: 1.1em;
         }
+        
         .error {
-            color: #e74c3c;
-            padding: 10px;
-            background-color: #fadbd8;
-            border-radius: 4px;
-            margin: 10px 0;
+            color: var(--negative);
+            background-color: #fef2f2;
+            border-radius: 6px;
+            margin: 20px 0;
             display: none;
         }
+        
         .last-updated {
             text-align: right;
-            color: #7f8c8d;
-            font-size: 0.9em;
-            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.85em;
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: #f8f9fa;
+        }
+        
+        .etf-symbol {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .etf-name {
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.9em;
+            }
+            
+            .section-header {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1>📊 ETF Market Dashboard</h1>
+        </div>
+    </header>
+    
     <div class="container">
-        <h1>📈 ETF Market Data</h1>
-        
         <div id="loading" class="loading">Loading ETF data...</div>
         <div id="error" class="error"></div>
         
         <div id="data-container" style="display: none;">
-            <table id="etf-table">
-                <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>ETF Name</th>
-                        <th>Current Price (₹)</th>
-                        <th>52W Low (₹)</th>
-                        <th>52W High (₹)</th>
-                        <th>% From Low</th>
-                        <th>% From High</th>
-                    </tr>
-                </thead>
-                <tbody id="etf-table-body">
-                    <!-- Data will be inserted here by JavaScript -->
-                </tbody>
-            </table>
+            <!-- Main Indices Section -->
+            <div class="section" id="indices-section">
+                <h2 class="section-header">📊 Main Indices</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>ETF Name</th>
+                                <th>Price (₹)</th>
+                                <th>52W Low (₹)</th>
+                                <th>52W High (₹)</th>
+                                <th>% From Low</th>
+                                <th>% From High</th>
+                            </tr>
+                        </thead>
+                        <tbody id="indices-table-body">
+                            <!-- Indices data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Commodities Section -->
+            <div class="section" id="commodities-section">
+                <h2 class="section-header">💰 Commodities</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>ETF Name</th>
+                                <th>Price (₹)</th>
+                                <th>52W Low (₹)</th>
+                                <th>52W High (₹)</th>
+                                <th>% From Low</th>
+                                <th>% From High</th>
+                            </tr>
+                        </thead>
+                        <tbody id="commodities-table-body">
+                            <!-- Commodities data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Sectors Section -->
+            <div class="section" id="sectors-section">
+                <h2 class="section-header">🏭 Sectors</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>ETF Name</th>
+                                <th>Price (₹)</th>
+                                <th>52W Low (₹)</th>
+                                <th>52W High (₹)</th>
+                                <th>% From Low</th>
+                                <th>% From High</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sectors-table-body">
+                            <!-- Sectors data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
             <div class="last-updated" id="last-updated"></div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
             const loadingEl = document.getElementById('loading');
             const errorEl = document.getElementById('error');
             const dataContainer = document.getElementById('data-container');
-            const tableBody = document.getElementById('etf-table-body');
             const lastUpdatedEl = document.getElementById('last-updated');
+            
+            // Table bodies for each section
+            const indicesTableBody = document.getElementById('indices-table-body');
+            const commoditiesTableBody = document.getElementById('commodities-table-body');
+            const sectorsTableBody = document.getElementById('sectors-table-body');
 
             // Function to format numbers with commas and 2 decimal places
             function formatNumber(num) {
@@ -127,13 +268,16 @@
             function createEtfRow(etf) {
                 const row = document.createElement('tr');
                 
+                // Remove .NS suffix from symbol if present
+                const displaySymbol = (etf.symbol || '').replace(/\.NS$/, '');
+                
                 // Determine CSS class based on percentage change
                 const lowChangeClass = etf.change_from_low_pct >= 0 ? 'positive' : 'negative';
                 const highChangeClass = etf.change_from_high_pct >= 0 ? 'positive' : 'negative';
                 
                 row.innerHTML = `
-                    <td><strong>${etf.symbol || 'N/A'}</strong></td>
-                    <td>${etf.name || 'N/A'}</td>
+                    <td class="etf-symbol">${displaySymbol || 'N/A'}</td>
+                    <td class="etf-name">${etf.name || 'N/A'}</td>
                     <td>₹${formatNumber(etf.current_price)}</td>
                     <td>₹${formatNumber(etf.low_52w)}</td>
                     <td>₹${formatNumber(etf.high_52w)}</td>
@@ -143,6 +287,29 @@
                 
                 return row;
             }
+            
+            // Function to categorize ETFs
+            function categorizeEtf(etf) {
+                const symbol = etf.symbol || '';
+                const name = (etf.name || '').toLowerCase();
+                
+                // Commodities (Gold, Silver)
+                if (symbol.includes('GOLD') || symbol.includes('SILVER') || 
+                    name.includes('gold') || name.includes('silver')) {
+                    return 'commodities';
+                }
+                
+                // Main Indices (NIFTY, SENSEX, BANKNIFTY, etc.)
+                if (symbol.includes('NIFTY') || symbol.includes('SENSEX') || 
+                    symbol.includes('BANK') || symbol.includes('JUNIOR') ||
+                    name.includes('nifty') || name.includes('sensex') || 
+                    name.includes('bank') || name.includes('junior')) {
+                    return 'indices';
+                }
+                
+                // Everything else is considered a sector
+                return 'sectors';
+            }
 
             // Function to load and display ETF data
             async function loadEtfData() {
@@ -151,6 +318,11 @@
                     loadingEl.style.display = 'block';
                     errorEl.style.display = 'none';
                     dataContainer.style.display = 'none';
+                    
+                    // Clear previous data
+                    indicesTableBody.innerHTML = '';
+                    commoditiesTableBody.innerHTML = '';
+                    sectorsTableBody.innerHTML = '';
                     
                     // Fetch the data
                     const response = await fetch('./data.json');
@@ -165,14 +337,34 @@
                         throw new Error('No ETF data available');
                     }
                     
-                    // Clear previous data
-                    tableBody.innerHTML = '';
-                    
-                    // Add each ETF to the table
+                    // Categorize and display ETFs
                     data.forEach(etf => {
+                        const category = categorizeEtf(etf);
                         const row = createEtfRow(etf);
-                        tableBody.appendChild(row);
+                        
+                        switch(category) {
+                            case 'indices':
+                                indicesTableBody.appendChild(row);
+                                break;
+                            case 'commodities':
+                                commoditiesTableBody.appendChild(row);
+                                break;
+                            case 'sectors':
+                            default:
+                                sectorsTableBody.appendChild(row);
+                        }
                     });
+                    
+                    // Hide empty sections
+                    if (indicesTableBody.children.length === 0) {
+                        document.getElementById('indices-section').style.display = 'none';
+                    }
+                    if (commoditiesTableBody.children.length === 0) {
+                        document.getElementById('commodities-section').style.display = 'none';
+                    }
+                    if (sectorsTableBody.children.length === 0) {
+                        document.getElementById('sectors-section').style.display = 'none';
+                    }
                     
                     // Update last updated time
                     const now = new Date();
@@ -193,8 +385,8 @@
             // Load data when the page loads
             loadEtfData();
             
-            // Optional: Add a refresh button functionality
-            // document.getElementById('refresh-btn').addEventListener('click', loadEtfData);
+            // Refresh data every 5 minutes
+            setInterval(loadEtfData, 5 * 60 * 1000);
         });
     </script>
 </body>
