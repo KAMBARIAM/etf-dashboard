@@ -38,6 +38,19 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .table-responsive table {
+            min-width: 800px; /* Minimum width to show all columns */
+            width: 100%;
+        }
+        
         h1 {
             margin: 0;
             text-align: center;
@@ -139,16 +152,42 @@
         
         @media (max-width: 768px) {
             .container {
-                padding: 10px;
+                padding: 5px;
+                max-width: 100%;
+                overflow-x: hidden;
             }
             
             th, td {
-                padding: 10px 8px;
+                padding: 12px 10px;
                 font-size: 0.9em;
+                white-space: nowrap;
             }
             
             .section-header {
-                font-size: 1.2em;
+                font-size: 1.3em;
+                padding: 10px 5px;
+                position: sticky;
+                left: 5px;
+                background: white;
+                z-index: 1;
+            }
+            
+            /* Make first column sticky on mobile */
+            th:first-child,
+            td:first-child {
+                position: sticky;
+                left: 0;
+                background: white;
+                z-index: 1;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            }
+            
+            /* Make header sticky */
+            thead th {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background: #f8f9fa;
             }
         }
     </style>
