@@ -48,18 +48,18 @@
     "symbol": "MON100.NS",
     "name": "MOTILAL OS NASDAQ100 ETF",
     "current_price": 328.74,
-    "low_52w": 176.11,
+    "low_52w": 176.12,
     "high_52w": 332.13,
-    "change_from_low_pct": 86.67,
+    "change_from_low_pct": 86.66,
     "change_from_high_pct": -1.02
   },
   {
     "symbol": "GOLDBEES.NS",
     "name": "NIP IND ETF GOLD BEES",
     "current_price": 129.04,
-    "low_52w": 77.38,
+    "low_52w": 78.63,
     "high_52w": 148.14,
-    "change_from_low_pct": 66.76,
+    "change_from_low_pct": 64.11,
     "change_from_high_pct": -12.89
   },
   {
