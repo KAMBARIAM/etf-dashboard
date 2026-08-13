@@ -2,100 +2,100 @@
   {
     "symbol": "NIFTYBEES.NS",
     "name": "NIP IND ETF NIFTY BEES",
-    "current_price": 278.32,
+    "current_price": 278.16,
     "low_52w": 251.7,
     "high_52w": 302.25,
-    "change_from_low_pct": 10.58,
-    "change_from_high_pct": -7.92
+    "change_from_low_pct": 10.51,
+    "change_from_high_pct": -7.97
   },
   {
     "symbol": "JUNIORBEES.NS",
     "name": "NIP IND ETF JUNIOR BEES",
-    "current_price": 806.31,
+    "current_price": 807.69,
     "low_52w": 632.34,
     "high_52w": 818.04,
-    "change_from_low_pct": 27.51,
-    "change_from_high_pct": -1.43
+    "change_from_low_pct": 27.73,
+    "change_from_high_pct": -1.27
   },
   {
     "symbol": "BANKBEES.NS",
     "name": "NIP IND ETF BANK BEES",
-    "current_price": 599.01,
+    "current_price": 597.97,
     "low_52w": 515.98,
     "high_52w": 638.99,
-    "change_from_low_pct": 16.09,
-    "change_from_high_pct": -6.26
+    "change_from_low_pct": 15.89,
+    "change_from_high_pct": -6.42
   },
   {
     "symbol": "ITBEES.NS",
     "name": "NIP IND ETF IT",
-    "current_price": 34.65,
+    "current_price": 34.77,
     "low_52w": 28.55,
     "high_52w": 44.27,
-    "change_from_low_pct": 21.37,
-    "change_from_high_pct": -21.73
+    "change_from_low_pct": 21.79,
+    "change_from_high_pct": -21.46
   },
   {
     "symbol": "CPSEETF.NS",
     "name": "CPSE ETF",
-    "current_price": 93.86,
+    "current_price": 94.37,
     "low_52w": 85.67,
     "high_52w": 112.0,
-    "change_from_low_pct": 9.56,
-    "change_from_high_pct": -16.2
+    "change_from_low_pct": 10.16,
+    "change_from_high_pct": -15.74
   },
   {
     "symbol": "MON100.NS",
     "name": "MOTILAL OS NASDAQ100 ETF",
-    "current_price": 331.16,
-    "low_52w": 197.81,
+    "current_price": 330.55,
+    "low_52w": 198.73,
     "high_52w": 342.55,
-    "change_from_low_pct": 67.41,
-    "change_from_high_pct": -3.33
+    "change_from_low_pct": 66.33,
+    "change_from_high_pct": -3.5
   },
   {
     "symbol": "GOLDBEES.NS",
     "name": "NIP IND ETF GOLD BEES",
-    "current_price": 126.45,
+    "current_price": 125.48,
     "low_52w": 80.02,
     "high_52w": 148.14,
-    "change_from_low_pct": 58.02,
-    "change_from_high_pct": -14.64
+    "change_from_low_pct": 56.81,
+    "change_from_high_pct": -15.3
   },
   {
     "symbol": "SILVERBEES.NS",
     "name": "NIPPONAMC - NETFSILVER",
-    "current_price": 225.76,
+    "current_price": 220.97,
     "low_52w": 106.64,
     "high_52w": 360.0,
-    "change_from_low_pct": 111.7,
-    "change_from_high_pct": -37.29
+    "change_from_low_pct": 107.21,
+    "change_from_high_pct": -38.62
   },
   {
     "symbol": "HDFCNIFTY.NS",
     "name": "HDFCAMC - HDFCNIFTY",
-    "current_price": 275.29,
-    "low_52w": 266.22,
-    "high_52w": 289.24,
-    "change_from_low_pct": 3.41,
-    "change_from_high_pct": -4.82
+    "current_price": 275.2,
+    "low_52w": 247.56,
+    "high_52w": 301.88,
+    "change_from_low_pct": 11.16,
+    "change_from_high_pct": -8.84
   },
   {
     "symbol": "MOM100.NS",
     "name": "MOTILAL OS MIDCAP100 ETF",
-    "current_price": 68.76,
+    "current_price": 69.0,
     "low_52w": 56.15,
     "high_52w": 69.48,
-    "change_from_low_pct": 22.46,
-    "change_from_high_pct": -1.04
+    "change_from_low_pct": 22.89,
+    "change_from_high_pct": -0.69
   },
   {
     "symbol": "SETFNIF50.NS",
     "name": "SBI-ETF NIFTY 50",
-    "current_price": 262.98,
+    "current_price": 262.84,
     "low_52w": 237.9,
     "high_52w": 287.33,
-    "change_from_low_pct": 10.54,
-    "change_from_high_pct": -8.47
+    "change_from_low_pct": 10.48,
+    "change_from_high_pct": -8.52
   }
 ]
