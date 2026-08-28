@@ -74,11 +74,11 @@
   {
     "symbol": "HDFCNIFTY.NS",
     "name": "HDFCAMC - HDFCNIFTY",
-    "current_price": 272.77,
+    "current_price": 272.45,
     "low_52w": 247.56,
     "high_52w": 301.88,
-    "change_from_low_pct": 10.18,
-    "change_from_high_pct": -9.64
+    "change_from_low_pct": 10.05,
+    "change_from_high_pct": -9.75
   },
   {
     "symbol": "MOM100.NS",
