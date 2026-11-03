@@ -39,7 +39,7 @@
     "symbol": "CPSEETF.NS",
     "name": "CPSE ETF",
     "current_price": NaN,
-    "low_52w": 84.41,
+    "low_52w": 84.1,
     "high_52w": 112.0,
     "change_from_low_pct": NaN,
     "change_from_high_pct": NaN
@@ -74,11 +74,11 @@
   {
     "symbol": "HDFCNIFTY.NS",
     "name": "HDFCAMC - HDFCNIFTY",
-    "current_price": 262.73,
+    "current_price": 267.14,
     "low_52w": 244.82,
     "high_52w": 301.88,
-    "change_from_low_pct": 7.32,
-    "change_from_high_pct": -12.97
+    "change_from_low_pct": 9.12,
+    "change_from_high_pct": -11.51
   },
   {
     "symbol": "MOM100.NS",
