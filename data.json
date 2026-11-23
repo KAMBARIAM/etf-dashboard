@@ -22,7 +22,7 @@
     "name": "NIP IND ETF BANK BEES",
     "current_price": NaN,
     "low_52w": 515.98,
-    "high_52w": 653.65,
+    "high_52w": 670.0,
     "change_from_low_pct": NaN,
     "change_from_high_pct": NaN
   },
@@ -57,7 +57,7 @@
     "symbol": "GOLDBEES.NS",
     "name": "NIP IND ETF GOLD BEES",
     "current_price": NaN,
-    "low_52w": 100.61,
+    "low_52w": 100.11,
     "high_52w": 148.14,
     "change_from_low_pct": NaN,
     "change_from_high_pct": NaN
@@ -66,7 +66,7 @@
     "symbol": "SILVERBEES.NS",
     "name": "NIPPONAMC - NETFSILVER",
     "current_price": NaN,
-    "low_52w": 143.65,
+    "low_52w": 140.25,
     "high_52w": 360.0,
     "change_from_low_pct": NaN,
     "change_from_high_pct": NaN
@@ -74,11 +74,11 @@
   {
     "symbol": "HDFCNIFTY.NS",
     "name": "HDFCAMC - HDFCNIFTY",
-    "current_price": 291.01,
+    "current_price": 286.62,
     "low_52w": 244.82,
     "high_52w": 301.88,
-    "change_from_low_pct": 18.87,
-    "change_from_high_pct": -3.6
+    "change_from_low_pct": 17.07,
+    "change_from_high_pct": -5.05
   },
   {
     "symbol": "MOM100.NS",
