@@ -74,11 +74,11 @@
   {
     "symbol": "HDFCNIFTY.NS",
     "name": "HDFCAMC - HDFCNIFTY",
-    "current_price": 292.42,
+    "current_price": 289.05,
     "low_52w": 244.82,
     "high_52w": 301.88,
-    "change_from_low_pct": 19.44,
-    "change_from_high_pct": -3.13
+    "change_from_low_pct": 18.07,
+    "change_from_high_pct": -4.25
   },
   {
     "symbol": "MOM100.NS",
@@ -92,10 +92,10 @@
   {
     "symbol": "SETFNIF50.NS",
     "name": "SBI NIFTY 50 ETF",
-    "current_price": 277.87,
+    "current_price": 279.0,
     "low_52w": 234.87,
-    "high_52w": 279.45,
-    "change_from_low_pct": 18.31,
-    "change_from_high_pct": -0.57
+    "high_52w": 284.81,
+    "change_from_low_pct": 18.79,
+    "change_from_high_pct": -2.04
   }
 ]
